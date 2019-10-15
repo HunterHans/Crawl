@@ -249,8 +249,8 @@ class Crawl():
         key=soup.select('.basicInfo-block  dt')
         val=soup.select('.basicInfo-block dd')
 
-        os.chdir(self.path+'\\'+self.output_path_html)
-        with open('huawei'+'.html','w',encoding='utf-8') as f:
+        os.chdir(self.output_path_html)
+        with open(title+'.html','w',encoding='utf-8') as f:
             f.write(response)
             f.close()
 
