@@ -55,22 +55,15 @@ class ParseSourceHtml():
     def clear_tab(self,text):
         return text.replace(chr(160),'').strip()
     
-    def catch_data(self,soup):
+    def catch_data(self,soup,file):
         try:
+            #identify
             title=soup.select('h1')[0].text.strip()
         except Exception as e:
             print('[ERROR] catch title')
             title='null'
 
-        
-        #文本数据
-        result=soup.select('h1,.level-2,.level-3,.para,table')
-        #半结构化数据
-        key=soup.select('.basicInfo-block  dt')
-        val=soup.select('.basicInfo-block dd')
-
-
-        with open('huawei'+'.xml','w',encoding='utf-8') as f:
+        with open(file.replace('.html','.xml'),'w',encoding='utf-8') as f:
             f.write('<?xml version="1.0" ?>'+'\n')
             f.write("<body>\n")
             if self.data_css!='':
