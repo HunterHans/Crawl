@@ -12,7 +12,7 @@ class ParseSourceHtml():
         self.box_key_css=''
         self.box_value_css=''   
         self.box_item_css=''
-        self.rubbish=''
+        self.rubbish='default'
 
         self.path=os.getcwd()
         os.chdir(self.path)
@@ -109,7 +109,7 @@ class ParseSourceHtml():
                             continue
                         f.write("<p>")
                         f.write(info.strip()+'</p>\n')
-                f.write("</body>\n")
+            f.write("</body>\n")
 
             #半结构化数据写入
             f.write('<box>')
