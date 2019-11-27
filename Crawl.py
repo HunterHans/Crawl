@@ -39,7 +39,7 @@ class Crawl():
         self.start_entity_file=self.path+r'/config/start_entity.txt'
 
         # self.url_json='https://baike.baidu.com/guanxi/jsondata?action=getViewLemmaData&args=%5B0%2C8%2C%7B%22fentryTableId%22%3A35432%2C%22lemmaId%22%3A87772%2C%22subLemmaId%22%3A{}%7D%2Cfalse%5D'
-
+        #
 
 
         # self.url_head='https://baike.baidu.com'
