@@ -7,7 +7,18 @@ import re
 
 class Crawl():
     def __init__(self):
-        self.database='default_database_'
+        with open('config/config.json','r') as f:
+            data=json.load(f)
+            f.close()
+
+        self.database=data['database']
+        self.host=data['host']
+        self.user=data['user']
+        self.password=data['password']
+
+        self.url_search=data['url_search']+'{}'
+        print(self.url_search)
+
         self.new_urls_css=''
         self.data_css=''
         self.box_key_css=''
@@ -26,7 +37,7 @@ class Crawl():
         if not os.path.exists(self.output_path_html):
             os.mkdir(self.output_path_html)
 
-        self.db=pymysql.connect('localhost','HunterHan','1234',self.database)
+        self.db=pymysql.connect(self.host,self.user,self.password,self.database)
         self.cursor=self.db.cursor()
 
         self.new_urls=[]
@@ -37,13 +48,6 @@ class Crawl():
         self.start_url=[]
         self.start_url_file=self.path+r'/config/start_url.txt'
         self.start_entity_file=self.path+r'/config/start_entity.txt'
-
-        # self.url_json='https://baike.baidu.com/guanxi/jsondata?action=getViewLemmaData&args=%5B0%2C8%2C%7B%22fentryTableId%22%3A35432%2C%22lemmaId%22%3A87772%2C%22subLemmaId%22%3A{}%7D%2Cfalse%5D'
-        #
-
-
-        # self.url_head='https://baike.baidu.com'
-        # self.url_search='https://baike.baidu.com/item/{}'
 
         self.num=0
         self.max=1
@@ -61,9 +65,14 @@ class Crawl():
             return response.text
 
     def parse_entity_to_url(self):
+        entity_lst=[]
         if os.path.exists(self.start_url_file):
             with open(self.start_url_file,'r',encoding='utf-8') as f:
                 entity_lst=f.read().split('\n')
+                for e in entity_lst:
+                    if e=="":
+                        entity_lst.remove(e)
+
                 f.close()
         else:
             entity_lst=[]
@@ -72,16 +81,20 @@ class Crawl():
             with open(self.start_entity_file,'r',encoding='utf-8') as f:
                 text=f.read().split()
                 for i in text:
+                    print(i)
                     url=self.url_search.format(i)
+                    
                     entity_lst.append(url)
+                    print(entity_lst)
                 f.close()
         else:
             return 
-
+        
         with open(self.start_url_file,'w',encoding='utf-8') as f:
             for e in entity_lst:
                 f.write(e+'\n')
             f.close()
+
     def import_urls(self,tbl):
         sql="select url,title,relative,tags from {};".format(tbl)
         try:
@@ -343,7 +356,7 @@ class Crawl():
 
 def main():
     crawl=Crawl()
-    crawl.parse_entity_to_url()
+    # crawl.parse_entity_to_url()
     crawl.parse()
 
 if __name__=='__main__':

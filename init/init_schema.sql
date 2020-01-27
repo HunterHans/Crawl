@@ -29,6 +29,8 @@ CREATE TABLE `dead_urls_tbl` (
   `title` varchar(200) DEFAULT NULL,
   `relative` varchar(20) DEFAULT NULL,
   `tags` varchar(200) DEFAULT NULL,
+  `type` varchar(200) DEFAULT NULL,
+  `file_name` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`url`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -54,6 +56,8 @@ CREATE TABLE `new_urls_tbl` (
   `title` varchar(200) DEFAULT NULL,
   `relative` varchar(20) DEFAULT NULL,
   `tags` varchar(200) DEFAULT NULL,
+  `type` varchar(200) DEFAULT NULL,
+  `file_name` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`url`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -79,6 +83,8 @@ CREATE TABLE `old_urls_tbl` (
   `title` varchar(200) DEFAULT NULL,
   `relative` varchar(20) DEFAULT NULL,
   `tags` varchar(200) DEFAULT NULL,
+  `type` varchar(200) DEFAULT NULL,
+  `file_name` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`url`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
