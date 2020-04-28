@@ -1,6 +1,7 @@
 import os 
 import json
 
+
 def main():
     path=os.getcwd()
     with open('init/init_schema.sql','r') as f:
